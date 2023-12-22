@@ -2,11 +2,15 @@ import { Modal } from "react-bootstrap"
 import OperationList from "../../operation-list/OperationList"
 import { useState } from "react";
 
-function OperationListModal() {
-    const [show, setShow] = useState(true);
+export interface IOperationListModalProps {
+    onClose: () => void,
+    state: boolean,
+}
+
+function OperationListModal({ onClose, state }: IOperationListModalProps) {
 
     return (
-        <Modal show={show} size={'xl'} onHide={() => setShow(false)}>
+        <Modal show={state} size={'xl'} onHide={() => onClose()}>
             <Modal.Header closeButton>
                 <Modal.Title>Список операций</Modal.Title>
             </Modal.Header>
