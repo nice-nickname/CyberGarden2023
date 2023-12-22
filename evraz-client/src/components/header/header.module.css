@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  padding: 0 50px;
+  box-sizing: border-box;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 100vw;
+  box-shadow: 1px 0 2px 1px #0000008f;
+
+  background: white;
+}
+
+.header__btn {
+    cursor: pointer;
+    line-height: 16px;
+    font-size: 16px;
+    margin: 0;
+}
+
+.header__btn_disabled {
+    color: #7a7a7a;
+}

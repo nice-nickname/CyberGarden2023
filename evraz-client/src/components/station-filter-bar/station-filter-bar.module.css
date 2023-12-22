@@ -1,0 +1,34 @@
+.bar {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+
+    margin: 40px auto 20px;
+    max-width: 1280px;
+    width: 100vw;
+}
+
+.bar_select {
+    width: 200px !important;
+}
+
+.bar__selected {
+    border-radius: 4px;
+    background: white;
+    border: 1px solid var(--link-button-link-disabled, #858DA6); 
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.bar__item {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+
+.bar__name_item {
+    font-size: 14px;
+    line-height: 14px;
+    margin: 0;
+}
