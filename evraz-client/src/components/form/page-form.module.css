@@ -1,13 +1,12 @@
 .form {
     width: 100%;
-    border: 1px solid var(--link-button-link-disabled, #858DA6); ;
     border-radius: 8px;
     overflow: hidden;
     background: white;
+    box-shadow: 0 0 2px 2px #0000008f;
 }
 
 .form__header {
-    border-bottom: 1px solid var(--link-button-link-disabled, #858DA6); 
     background: rgb(235, 235, 235);
     text-align: start;
     padding: 0 20px;

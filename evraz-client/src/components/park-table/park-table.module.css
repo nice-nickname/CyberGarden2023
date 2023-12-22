@@ -1,0 +1,32 @@
+.table {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.table__name {
+    color: white;
+    width: fit-content;
+    margin: 0;
+    width: 100%;
+}
+
+.table__header {
+    width: 100%;
+    background: #15386C;
+    align-items: center;
+}
+
+
+.table__row {
+    display: grid;
+    grid-template-columns: 50px 50px 50px 1fr 50px;
+    align-items: center;
+    gap: 5px
+}
+
+.table__cell_field {
+    border: 1px solid #818181;
+    height: 50px;
+    border-radius: 4px;
+}
