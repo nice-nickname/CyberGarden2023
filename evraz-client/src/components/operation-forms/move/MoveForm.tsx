@@ -1,11 +1,5 @@
-
 function OperationMoveForm() {
-
-    return (
-        <>
-        
-        </>
-    )
+  return <></>;
 }
 
-export default OperationMoveForm
+export default OperationMoveForm;
