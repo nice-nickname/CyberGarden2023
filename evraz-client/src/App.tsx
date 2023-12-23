@@ -14,6 +14,7 @@ import { store } from "./redux";
 import { OperationMoveForm } from "./components/operation-forms/move-form";
 
 import ws from './ws/websocket'
+import { OpenFormToast } from "./components/toasts";
 
 ws()
 
@@ -27,6 +28,7 @@ function App() {
           <StationPage />
           <Tooltip id="train-info" />
           <OperationMoveForm />
+          <OpenFormToast />
         </DndProvider>
       </QueryClientProvider>
     </Provider>

@@ -9,9 +9,22 @@ export default function () {
     console.log('ws', 'connected')
   }
 
+  let _ = 0
+
   connection.onmessage = ({ data }) => {
-    console.log(data)
-    store.dispatch(addOpenForm(data))
+    if (_++) {
+      store.dispatch(addOpenForm({
+        items: data,
+        action: 'add'
+      }))
+    }
+    else {
+      store.dispatch(addOpenForm({
+        items: data,
+        action: 'init'
+      }))
+    }
+
   }
 
   connection.onerror = () => {

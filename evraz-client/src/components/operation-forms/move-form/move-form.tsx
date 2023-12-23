@@ -10,11 +10,8 @@ import { OperationTypes } from "../../../types"
 import { useQuery } from "@tanstack/react-query"
 import moment from "moment"
 
-export interface IOperationMoveFormProps {
-  
-}
 
-function OperationMoveForm({  }: IOperationMoveFormProps) {
+function OperationMoveForm() {
 
   const operationTypeId = 2
 
@@ -62,7 +59,7 @@ function OperationMoveForm({  }: IOperationMoveFormProps) {
   })
 
   useEffect(() => {
-  
+
     if (type === OperationTypes.MOVE) {
       axios.get(`${baseUrl}forms/createForm`)
         .then(res => setFormId(res.data.formId))
@@ -79,7 +76,33 @@ function OperationMoveForm({  }: IOperationMoveFormProps) {
     ev.stopPropagation()
     ev.preventDefault()
 
-    console.log('submit')
+    const now = Date.now()
+
+    axios.post(`${baseUrl}forms/wagonMove`, {
+      timestamp: now,
+      formId: formId,
+      departureStation: Number(stationFirstId),
+      departurePark: parkFirstId,
+      departureWay: wayFirstId,
+      destinationStation: Number(stationSecondId),
+      destinationPark: parkSecondId,
+      destinationWay: waySecondId,
+      locomotives: [1],
+      wagons: [
+        trainFirstId
+      ],
+      needAcceptance: true,
+      reasonId: 1,
+      comment: "ahaha",
+      operationInitiator: "1"
+    }, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      }
+    },).then((res) => {
+      handleClose()
+    })
   }
 
   return (
@@ -89,7 +112,7 @@ function OperationMoveForm({  }: IOperationMoveFormProps) {
       </Modal.Header>
 
       <Modal.Body>
-        <Form id='form-move-wagon' onSubmit={handleSubmit}>
+        <Form id='form-move-wagon' onSubmit={handleSubmit} noValidate>
           <Row className='mb-1'>
             <h5>Перемещение вагона №{wagonData?.inventoryNumber}</h5>
           </Row>
@@ -103,7 +126,7 @@ function OperationMoveForm({  }: IOperationMoveFormProps) {
                 →
               </div>
               <div>
-              {stationSecondData?.title}, Парк {parkSecondData?.name}, путь ({waySecondData?.name})
+                {stationSecondData?.title}, Парк {parkSecondData?.name}, путь ({waySecondData?.name})
               </div>
             </Col>
           </Row>

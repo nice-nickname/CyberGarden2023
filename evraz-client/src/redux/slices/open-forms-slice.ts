@@ -1,11 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+
+export type ActionType = "add" | "delete" | "init"
 
 export interface IOpenFormsState {
-  formIds: number[]
+  formIds: number[],
+  lastAction: ActionType
 }
 
 export const initialiState: IOpenFormsState = {
-  formIds: []
+  formIds: [],
+  lastAction: "delete"
 }
 
 export const openFormsSlice = createSlice({
@@ -14,7 +18,17 @@ export const openFormsSlice = createSlice({
   reducers: {
     addOpenForm: (state: IOpenFormsState, { payload }) => {
       console.log('state', payload)
-      state.formIds = payload
+      state.formIds = payload.items
+      state.lastAction = payload.action
+    },
+
+    removeOpenForm: (state, action: PayloadAction<number>) => {
+      state.lastAction = 'delete'
+      state.formIds = [...state.formIds.filter(s => s !== action.payload)]
+    },
+
+    clearOpenForm: (state) => {
+      state.lastAction = 'delete'
     }
   }
 })
@@ -22,5 +36,7 @@ export const openFormsSlice = createSlice({
 export default openFormsSlice.reducer
 
 export const {
-  addOpenForm
+  addOpenForm,
+  removeOpenForm,
+  clearOpenForm
 } = openFormsSlice.actions
