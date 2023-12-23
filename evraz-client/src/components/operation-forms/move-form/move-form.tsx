@@ -9,12 +9,10 @@ import { RootState } from "../../../redux"
 import { OperationTypes } from "../../../types"
 import { useQuery } from "@tanstack/react-query"
 import moment from "moment"
-import DateTimePicker from "react-datetime-picker"
 
 
 function OperationMoveForm() {
-
-  const operationTypeId = 2
+  const operationTypeId = 2;
 
   const operations = operationTypes.find(s => s.id === operationTypeId)?.operations || []
 
@@ -31,56 +29,54 @@ function OperationMoveForm() {
     trainFirstId,
     wayFirstId,
     waySecondId,
-    type
-  } = useSelector((state: RootState) => state.stationOperationReducer)
+    type,
+  } = useSelector((state: RootState) => state.stationOperationReducer);
 
   const { data: wagonData } = useQuery({
-    queryKey: ['get-wagon', trainFirstId]
-  })
+    queryKey: ["get-wagon", trainFirstId],
+  });
 
   const { data: parkFirstData } = useQuery({
-    queryKey: ['get-park', parkFirstId]
-  })
+    queryKey: ["get-park", parkFirstId],
+  });
 
   const { data: parkSecondData } = useQuery({
-    queryKey: ['get-park', parkSecondId]
-  })
+    queryKey: ["get-park", parkSecondId],
+  });
 
   const { data: stationFirstData } = useQuery({
-    queryKey: ['get-station', stationFirstId]
-  })
+    queryKey: ["get-station", stationFirstId],
+  });
 
   const { data: stationSecondData } = useQuery({
-    queryKey: ['get-station', stationSecondId]
-  })
+    queryKey: ["get-station", stationSecondId],
+  });
 
   const { data: wayFirstData } = useQuery({
-    queryKey: ['get-way', wayFirstId]
-  })
+    queryKey: ["get-way", wayFirstId],
+  });
 
   const { data: waySecondData } = useQuery({
-    queryKey: ['get-way', waySecondId]
-  })
+    queryKey: ["get-way", waySecondId],
+  });
 
   useEffect(() => {
-
     if (type === OperationTypes.MOVE) {
-      axios.get(`${baseUrl}forms/createForm`)
-        .then(res => setFormId(res.data.formId))
+      axios
+        .get(`${baseUrl}forms/createForm`)
+        .then((res) => setFormId(res.data.formId));
+    } else {
+      setFormId(null);
     }
-    else {
-      setFormId(null)
-    }
+  }, [type]);
 
-  }, [type])
-
-  const handleClose = () => setFormId(null)
+  const handleClose = () => setFormId(null);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (ev) => {
-    ev.stopPropagation()
-    ev.preventDefault()
+    ev.stopPropagation();
+    ev.preventDefault();
 
-    const now = Date.now()
+    const now = Date.now();
 
     axios.post(`${baseUrl}forms/wagonMove`, {
       timestamp: now,
@@ -111,26 +107,24 @@ function OperationMoveForm() {
 
   return (
     <Modal show={formId !== null} onHide={handleClose} size="lg">
-      <Modal.Header closeButton>
-        Операция №{formId}
-      </Modal.Header>
+      <Modal.Header closeButton>Операция №{formId}</Modal.Header>
 
       <Modal.Body>
-        <Form id='form-move-wagon' onSubmit={handleSubmit} noValidate>
-          <Row className='mb-1'>
+        <Form id="form-move-wagon" onSubmit={handleSubmit} noValidate>
+          <Row className="mb-1">
             <h5>Перемещение вагона №{wagonData?.inventoryNumber}</h5>
           </Row>
 
-          <Row className='mb-3'>
-            <Col className='d-flex gap-2' xs={10}>
+          <Row className="mb-3">
+            <Col className="d-flex gap-2" xs={10}>
               <div>
-                {stationFirstData?.title}, Парк {parkFirstData?.name}, путь ({wayFirstData?.name})
+                {stationFirstData?.title}, Парк {parkFirstData?.name}, путь (
+                {wayFirstData?.name})
               </div>
+              <div>→</div>
               <div>
-                →
-              </div>
-              <div>
-                {stationSecondData?.title}, Парк {parkSecondData?.name}, путь ({waySecondData?.name})
+                {stationSecondData?.title}, Парк {parkSecondData?.name}, путь (
+                {waySecondData?.name})
               </div>
             </Col>
           </Row>
@@ -146,21 +140,31 @@ function OperationMoveForm() {
             </FormGroup>
           </Row>
 
-          <Row className='pt-2 mt-3 mb-3 border-top'>
+          <Row className="pt-2 mt-3 mb-3 border-top">
             <FormGroup as={Col}>
               <Form.Label>Тип операции</Form.Label>
-              <Select selected={operationTypeId} disabled data={operationTypes} mapper={i => ({
-                value: i.id,
-                text: i.name
-              })} />
+              <Select
+                selected={operationTypeId}
+                disabled
+                data={operationTypes}
+                mapper={(i) => ({
+                  value: i.id,
+                  text: i.name,
+                })}
+              />
             </FormGroup>
 
             <FormGroup as={Col}>
               <Form.Label>Операция</Form.Label>
-              <Select selected={6} disabled data={operations} mapper={i => ({
-                value: i.id,
-                text: i.name
-              })} />
+              <Select
+                selected={6}
+                disabled
+                data={operations}
+                mapper={(i) => ({
+                  value: i.id,
+                  text: i.name,
+                })}
+              />
             </FormGroup>
 
             <FormGroup as={Col}>
@@ -181,12 +185,12 @@ function OperationMoveForm() {
         <Button variant="secondary" onClick={handleClose}>
           Закрыть
         </Button>
-        <Button variant="primary" type="submit" form='form-move-wagon'>
+        <Button variant="primary" type="submit" form="form-move-wagon">
           Сохранить
         </Button>
       </Modal.Footer>
     </Modal>
-  )
+  );
 }
 
-export { OperationMoveForm }
+export { OperationMoveForm };

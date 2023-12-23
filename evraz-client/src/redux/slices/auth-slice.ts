@@ -1,23 +1,23 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-export type UserType = "admin" | "popusk"
+export type UserType = "admin" | "popusk";
 
 export interface IAuthState {
-  role: UserType,
-  isAuthenticated: boolean
+  role: UserType;
+  isAuthenticated: boolean;
 }
 
 export const initialState: IAuthState = {
   isAuthenticated: false,
-  role: 'popusk'
-}
+  role: "popusk",
+};
 
 export const authSlize = createSlice({
-  name: 'authSlise',
+  name: "authSlise",
   initialState: initialState,
   reducers: {
     authenticate: (state, action: PayloadAction<UserType>) => {
-      state.role = action.payload
-    }
-  }
-})
+      state.role = action.payload;
+    },
+  },
+});

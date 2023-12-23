@@ -1,1 +1,1 @@
-export * from './move-form'
+export * from "./move-form";

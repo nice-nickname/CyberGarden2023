@@ -1,4 +1,4 @@
-import { Form } from "react-bootstrap"
+import { Form } from "react-bootstrap";
 
 interface ISelectProps<TData> {
     mapper: (items: TData) => ISelectData,
@@ -9,8 +9,8 @@ interface ISelectProps<TData> {
 }
 
 interface ISelectData {
-    value: number,
-    text: string
+  value: number;
+  text: string;
 }
 
 function Select<TData>({ selected, disabled, data, mapper, onChange }: ISelectProps<TData>) {
@@ -22,11 +22,13 @@ function Select<TData>({ selected, disabled, data, mapper, onChange }: ISelectPr
         }}>
             <option></option>
 
-            {data.map(mapper).map(item => (
-                <option key={item.value} value={item.value}>{item.text}</option>
-            ))}
-        </Form.Select>
-    )
+      {data.map(mapper).map((item) => (
+        <option key={item.value} value={item.value}>
+          {item.text}
+        </option>
+      ))}
+    </Form.Select>
+  );
 }
 
-export { Select }
+export { Select };
