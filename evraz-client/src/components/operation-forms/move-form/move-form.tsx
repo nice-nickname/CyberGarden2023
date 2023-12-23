@@ -9,6 +9,7 @@ import { RootState } from "../../../redux"
 import { OperationTypes } from "../../../types"
 import { useQuery } from "@tanstack/react-query"
 import moment from "moment"
+import DateTimePicker from "react-datetime-picker"
 
 
 function OperationMoveForm() {
@@ -18,6 +19,9 @@ function OperationMoveForm() {
   const operations = operationTypes.find(s => s.id === operationTypeId)?.operations || []
 
   const [formId, setFormId] = useState<string | null>(null)
+  const [comments, setComments] = useState('')
+  const [reason, setReason] = useState(0)
+
 
   const {
     parkFirstId,
@@ -92,15 +96,15 @@ function OperationMoveForm() {
         trainFirstId
       ],
       needAcceptance: true,
-      reasonId: 1,
-      comment: "ahaha",
+      reasonId: reason,
+      comment: comments,
       operationInitiator: "1"
     }, {
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       }
-    },).then((res) => {
+    },).then(() => {
       handleClose()
     })
   }
@@ -134,11 +138,11 @@ function OperationMoveForm() {
           <Row>
             <FormGroup as={Col}>
               <Form.Label>Начало операции</Form.Label>
-              <Form.Control type="datetime-local" value={moment().toLocaleString()} />
+              <Form.Control disabled value={moment().format('DD.MM.YYYY hh:mm')} />
             </FormGroup>
             <FormGroup as={Col}>
-              <Form.Label>Окончание операции</Form.Label>
-              <Form.Control type="datetime-local" />
+              <Form.Label>Комментарии</Form.Label>
+              <Form.Control value={comments} onChange={ev => setComments(ev.target.value)} />
             </FormGroup>
           </Row>
 
@@ -161,10 +165,12 @@ function OperationMoveForm() {
 
             <FormGroup as={Col}>
               <Form.Label>Причина</Form.Label>
-              <Select selected={6} data={operationReasons} mapper={i => ({
-                value: i.id,
-                text: i.title
-              })} />
+              <Select onChange={v => setReason(v)}
+                data={operationReasons}
+                mapper={i => ({
+                  value: i.id,
+                  text: i.title
+                })} />
 
             </FormGroup>
           </Row>

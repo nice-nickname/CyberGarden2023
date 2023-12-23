@@ -4,7 +4,8 @@ interface ISelectProps<TData> {
     mapper: (items: TData) => ISelectData,
     data: TData[]
     selected?: number,
-    disabled?: boolean
+    disabled?: boolean,
+    onChange?: (value: number) => void
 }
 
 interface ISelectData {
@@ -12,10 +13,13 @@ interface ISelectData {
     text: string
 }
 
-function Select<TData>({ selected, disabled, data, mapper }: ISelectProps<TData>) {
+function Select<TData>({ selected, disabled, data, mapper, onChange }: ISelectProps<TData>) {
 
     return (
-        <Form.Select defaultValue={selected} disabled={disabled} >
+        <Form.Select defaultValue={selected} disabled={disabled} onChange={el => {
+          const valueAsNumber = Number(el.target.value)
+          onChange?.call(null, valueAsNumber)
+        }}>
             <option></option>
 
             {data.map(mapper).map(item => (
