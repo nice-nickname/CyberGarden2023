@@ -29,7 +29,7 @@ export function ParkRow({ id, stationId, parkId }: IParkRowProps) {
   const [, drop] = useDrop(() => ({
     accept: "123",
     drop: (data: any) => {
-      dispatch(setMoveTrain({ ...data, trainSecondId: id, parkSecondId: id, stationSecondId: stationId }));
+      dispatch(setMoveTrain({ ...data, trainSecondId: id, parkSecondId: parkId, stationSecondId: stationId }));
     },
   }));
 
