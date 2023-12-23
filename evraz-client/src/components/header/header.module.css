@@ -17,12 +17,12 @@
 }
 
 .header__btn {
-    cursor: pointer;
-    line-height: 16px;
-    font-size: 16px;
-    margin: 0;
+  cursor: pointer;
+  line-height: 16px;
+  font-size: 16px;
+  margin: 0;
 }
 
 .header__btn_disabled {
-    color: #7a7a7a;
+  color: #7a7a7a;
 }

@@ -1,27 +1,27 @@
 .bar {
-    background: #F7F7F9;
-    width: 100%;
-    padding: 5px;
+  background: #f7f7f9;
+  width: 100%;
+  padding: 5px;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-    gap: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 15px;
 }
 .bar__b {
-    width: 15px;
-    height: 15px;
+  width: 15px;
+  height: 15px;
 }
 
 .bar__item {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
 }
 
 .bar__name {
-    font-size: 14px;
-    line-height: 14px;
-    margin: 0;
+  font-size: 14px;
+  line-height: 14px;
+  margin: 0;
 }
