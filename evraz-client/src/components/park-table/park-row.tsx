@@ -3,6 +3,8 @@ import { Wagon } from "../wagon";
 import styles from "./park-table.module.css";
 import { useDrop } from "react-dnd";
 import { setMoveTrain } from "../../redux/slices/station-operation-slice";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 export interface IParkRowProps {
   id: number;
@@ -11,12 +13,24 @@ export interface IParkRowProps {
 export function ParkRow({ id }: IParkRowProps) {
   const a = [1, 1, 1, 1, 1, 1, 1];
 
+  const { data } = useQuery({
+    queryKey: ['get-way', id],
+    queryFn: async () => {
+      const response = await axios.get(`https://0a4b-83-97-115-37.ngrok-free.app/way/${id}`)
+      return response.data
+    }
+  })
+
   const [, drop] = useDrop(() => ({
     accept: "123",
     drop: (data: any) => {
       setMoveTrain({ trainFirstId: data.id, trainSecondId: id });
     },
   }));
+
+  if(!data) {
+    return null
+  }
 
   return (
     <div
@@ -34,8 +48,8 @@ export function ParkRow({ id }: IParkRowProps) {
       </div>
       <div className={styles.table__cell_field}></div>
       <div className={styles.table__cell_field} ref={drop}>
-        {a.map((a, index) => (
-          <Wagon id={index} />
+        {data.wagonsIds.map((id: number) => (
+          <Wagon id={id} />
         ))}
       </div>
       <div className={styles.table__cell_field}></div>

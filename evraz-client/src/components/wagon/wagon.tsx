@@ -3,12 +3,27 @@ import { useDrag } from "react-dnd";
 import styles from "./wagon.module.css";
 import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 import trainDefaultIcon from '../../assets/svg/train_default.svg'
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 export interface IWagonProps {
   id: number;
 }
 
 export function Wagon({ id }: IWagonProps) {
+
+  const { data } = useQuery({
+    queryKey: ['get-wagon'],
+    queryFn: async () => {
+      const response = await axios.get(`https://0a4b-83-97-115-37.ngrok-free.app/wagon/${id}`)
+      return response.data
+    }
+  })
+
+  if(!data) {
+    return null
+  }
+
   const popover = (
     <Popover id="popover-basic">
       <Popover.Header as="h3">Вагон № {id}</Popover.Header>
@@ -30,20 +45,20 @@ export function Wagon({ id }: IWagonProps) {
     </Popover>
   );
 
-  const [{ opacity }, dragRef] = useDrag(
-    () => ({
-      type: "123",
-      item: { id },
-      collect: (monitor) => ({
-        opacity: monitor.isDragging() ? 0 : 1,
-      }),
-    }),
-    [],
-  );
+  // const [{ opacity }, dragRef] = useDrag(
+  //   () => ({
+  //     type: "123",
+  //     item: { id },
+  //     collect: (monitor) => ({
+  //       opacity: monitor.isDragging() ? 0 : 1,
+  //     }),
+  //   }),
+  //   [],
+  // );
 
   return (
     <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-      <img ref={dragRef} style={{ opacity }} src={trainDefaultIcon}/>
+      <img src={trainDefaultIcon}/>
     </OverlayTrigger>
   );
 }
