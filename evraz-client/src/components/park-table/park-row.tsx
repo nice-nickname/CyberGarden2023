@@ -6,6 +6,7 @@ import { setMoveTrain } from "../../redux/slices/station-operation-slice";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { baseUrl } from "../../consts";
+import { useDispatch } from "react-redux";
 
 export interface IParkRowProps {
   id: number;
@@ -14,6 +15,8 @@ export interface IParkRowProps {
 }
 
 export function ParkRow({ id, stationId, parkId }: IParkRowProps) {
+
+  const dispatch = useDispatch()
 
   const { data } = useQuery({
     queryKey: ['get-way', id],
@@ -26,7 +29,7 @@ export function ParkRow({ id, stationId, parkId }: IParkRowProps) {
   const [, drop] = useDrop(() => ({
     accept: "123",
     drop: (data: any) => {
-      setMoveTrain({ ...data, trainSecondId: id, parkSecondId: id, stationSecondId: stationId });
+      dispatch(setMoveTrain({ ...data, trainSecondId: id, parkSecondId: id, stationSecondId: stationId }));
     },
   }));
 

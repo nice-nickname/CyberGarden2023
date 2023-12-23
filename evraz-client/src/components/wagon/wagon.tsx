@@ -17,7 +17,7 @@ export interface IWagonProps {
 export const Wagon = memo(({ id, parkId, stationId }: IWagonProps) => {
 
   const { data } = useQuery({
-    queryKey: ['get-wagon'],
+    queryKey: ['get-wagon', id],
     queryFn: async () => {
       const response = await axios.get(`${baseUrl}/wagon/${id}`)
       return response.data

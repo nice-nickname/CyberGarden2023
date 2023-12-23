@@ -4,6 +4,10 @@ import { Select } from "../../inputs/select"
 import { FormEventHandler, useEffect, useState } from "react"
 import axios from "axios"
 import { baseUrl } from "../../../consts"
+import { useSelector } from "react-redux"
+import { RootState } from "../../../redux"
+import { OperationTypes } from "../../../types"
+import { useQuery } from "@tanstack/react-query"
 
 export interface IOperationMoveFormProps {
   
@@ -15,22 +19,58 @@ function OperationMoveForm({  }: IOperationMoveFormProps) {
 
   const operations = operationTypes.find(s => s.id === operationTypeId)?.operations || []
 
-  const [show, setShow] = useState(false)
   const [formId, setFormId] = useState<string | null>(null)
 
+  const {
+    parkFirstId,
+    parkSecondId,
+    stationFirstId,
+    stationSecondId,
+    trainFirstId,
+    type
+  } = useSelector((state: RootState) => state.stationOperationReducer)
+
+  const { data: wagonData } = useQuery({
+    queryKey: ['get-wagon', trainFirstId]
+  })
+
+  const { data: parkFirstData } = useQuery({
+    queryKey: ['get-park', parkFirstId]
+  })
+
+  const { data: parkSecondData } = useQuery({
+    queryKey: ['get-park', parkSecondId]
+  })
+
+  const { data: stationFirstData } = useQuery({
+    queryKey: ['get-station', stationFirstId]
+  })
+
+  const { data: stationSecondData } = useQuery({
+    queryKey: ['get-station', stationSecondId]
+  })
+
+  const { data: wayFirstData } = useQuery({
+    queryKey: ['get-way', parkFirstId]
+  })
+
+  const { data: waySecondData } = useQuery({
+    queryKey: ['get-way', parkSecondId]
+  })
+
   useEffect(() => {
-    
-    if (show === true && formId === null) {
+  
+    if (type === OperationTypes.MOVE) {
       axios.get(`${baseUrl}forms/createForm`)
-        .then(res => console.log('ahaha', res.data))
+        .then(res => setFormId(res.data.formId))
     }
     else {
       setFormId(null)
     }
 
-  }, [show])
+  }, [type])
 
-  const handleClose = () => setShow(false)
+  const handleClose = () => setFormId(null)
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (ev) => {
     ev.stopPropagation()
@@ -40,7 +80,7 @@ function OperationMoveForm({  }: IOperationMoveFormProps) {
   }
 
   return (
-    <Modal show={show} onHide={handleClose} size="lg">
+    <Modal show={formId !== null} onHide={handleClose} size="lg">
       <Modal.Header closeButton>
         Операция №{formId}
       </Modal.Header>
@@ -48,19 +88,19 @@ function OperationMoveForm({  }: IOperationMoveFormProps) {
       <Modal.Body>
         <Form id='form-move-wagon' onSubmit={handleSubmit}>
           <Row className='mb-1'>
-            <h5>Перемещение вагона №{'1488'}</h5>
+            <h5>Перемещение вагона №{wagonData?.inventoryNumber}</h5>
           </Row>
 
           <Row className='mb-3'>
             <Col className='d-flex gap-2' xs={8}>
               <div>
-                Бебра, Парк Аахха, путь (XX)
+                {stationFirstData?.title}, Парк {parkFirstData?.name}, путь ({wayFirstData?.name})
               </div>
               <div>
                 →
               </div>
               <div>
-                Бебриус, парк Привеее, путь (PP)
+              {stationSecondData?.title}, Парк {parkSecondData?.name}, путь ({waySecondData?.name})
               </div>
             </Col>
           </Row>
