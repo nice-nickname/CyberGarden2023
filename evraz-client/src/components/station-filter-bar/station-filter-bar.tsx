@@ -4,8 +4,21 @@ import { TStation } from "../../types";
 import { stationsMock } from "../../mock";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import closeIcon from "../../assets/svg/close.svg";
+import axios from "axios";
+
+import {
+  useQuery
+} from '@tanstack/react-query'
 
 export function StationFilterBar() {
+
+  const { data } = useQuery({
+    queryKey: ['get-stations'],
+    queryFn: async () => {
+      const data = await axios.get('https://0a4b-83-97-115-37.ngrok-free.app/stations')
+      return data.data
+    }
+  })
   const [stations, setStations] = useState(
     stationsMock.map((station) => ({ ...station, state: false })),
   );
@@ -26,16 +39,17 @@ export function StationFilterBar() {
     [stations],
   );
 
-  useEffect(() => {
-    console.log(filteredStations, stations);
-  }, [filteredStations, stations]);
+  if(!data) {
+    return null
+  }
+
 
   return (
     <div className={styles.bar}>
       <Form.Select className={styles.bar_select} onChange={onClickOption}>
-        {stations.map((station: TStation) => (
+        {data.map((station: TStation) => (
           <option key={station.id} value={station.id}>
-            {station.name}
+            {station.title}
           </option>
         ))}
       </Form.Select>
