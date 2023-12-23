@@ -5,8 +5,8 @@ export interface IStationOperationSlice {
   type: OperationTypes | null;
   trainFirstId: number | null;
   trainSecondId: number | null;
-  wayFirstId: number | null,
-  waySecondId: number | null,
+  wayFirstId: number | null;
+  waySecondId: number | null;
   parkFirstId: number | null;
   parkSecondId: number | null;
   stationFirstId: number | null;
@@ -22,7 +22,7 @@ export const initialState: IStationOperationSlice = {
   parkFirstId: null,
   parkSecondId: null,
   stationFirstId: null,
-  stationSecondId: null
+  stationSecondId: null,
 };
 
 export const stationOperationSlice = createSlice({
@@ -30,25 +30,25 @@ export const stationOperationSlice = createSlice({
   initialState,
   reducers: {
     setMoveTrain: (state: IStationOperationSlice, { payload }) => {
-      console.log(payload)
-      state.trainFirstId =  Number(payload.trainFirstId);
-      state.type = OperationTypes.MOVE
-      state.trainSecondId =  Number(payload.trainFirstId);
-      state.wayFirstId = payload.firstWayId
-      state.waySecondId = payload.waySecondId
-      state.parkFirstId = payload.parkFirstId
-      state.parkSecondId = payload.parkSecondId
-      state.stationFirstId = payload.stationFirstId
-      state.stationSecondId =  payload.stationSecondId
+      console.log(payload);
+      state.trainFirstId = Number(payload.trainFirstId);
+      state.type = OperationTypes.MOVE;
+      state.trainSecondId = Number(payload.trainFirstId);
+      state.wayFirstId = payload.firstWayId;
+      state.waySecondId = payload.waySecondId;
+      state.parkFirstId = payload.parkFirstId;
+      state.parkSecondId = payload.parkSecondId;
+      state.stationFirstId = payload.stationFirstId;
+      state.stationSecondId = payload.stationSecondId;
     },
     clearOperation: (state: IStationOperationSlice) => {
       state.trainFirstId = null;
       state.type = null;
       state.trainSecondId = null;
-      state.parkFirstId = null
-      state.parkSecondId = null
-      state.stationFirstId = null
-      state.stationSecondId = null
+      state.parkFirstId = null;
+      state.parkSecondId = null;
+      state.stationFirstId = null;
+      state.stationSecondId = null;
     },
   },
 });

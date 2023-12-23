@@ -5,22 +5,21 @@ import axios from "axios";
 import { baseUrl } from "../../consts";
 
 export interface IParkTableProps {
-  id: number
-  stationId: number
+  id: number;
+  stationId: number;
 }
 
 export function ParkTable({ id, stationId }: IParkTableProps) {
-
   const { data } = useQuery({
-    queryKey: ['get-park', id],
+    queryKey: ["get-park", id],
     queryFn: async () => {
-      const response = await axios.get(`${baseUrl}park/${id}`)
-      return response.data
-    }
-  })
+      const response = await axios.get(`${baseUrl}park/${id}`);
+      return response.data;
+    },
+  });
 
   if (!data) {
-    return null
+    return null;
   }
 
   return (

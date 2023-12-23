@@ -6,31 +6,31 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import closeIcon from "../../assets/svg/close.svg";
 import axios from "axios";
 
-import {
-  useQuery
-} from '@tanstack/react-query'
+import { useQuery } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 import { setStation } from "../../redux/slices/station-slice";
 import { baseUrl } from "../../consts";
 
 export function StationFilterBar() {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const { data } = useQuery({
-    queryKey: ['get-stations'],
+    queryKey: ["get-stations"],
     queryFn: async () => {
-      const data = await axios.get(`${baseUrl}stations`)
-      return data.data
-    }
-  })
-  
-  const onChangeStation = useCallback(({target}: any) => {
-    dispatch(setStation({id: target.value}))
-  }, [dispatch])
+      const data = await axios.get(`${baseUrl}stations`);
+      return data.data;
+    },
+  });
+
+  const onChangeStation = useCallback(
+    ({ target }: any) => {
+      dispatch(setStation({ id: target.value }));
+    },
+    [dispatch],
+  );
 
   if (!data) {
-    return null
+    return null;
   }
 
   return (

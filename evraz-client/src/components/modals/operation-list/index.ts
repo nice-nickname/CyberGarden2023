@@ -1,1 +1,1 @@
-export * from "./operation-list-modal"
+export * from "./operation-list-modal";

@@ -1,13 +1,13 @@
 .btn {
-    border-radius: 4px;
-    background: #e32213;
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    transition: 0.5s;
+  border-radius: 4px;
+  background: #e32213;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  transition: 0.5s;
 }
 
 .btn:hover {
-    opacity: 0.9;
-    box-shadow: 0 0 2px 1px #0000008f;
+  opacity: 0.9;
+  box-shadow: 0 0 2px 1px #0000008f;
 }

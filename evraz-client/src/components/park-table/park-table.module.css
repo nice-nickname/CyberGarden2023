@@ -7,14 +7,17 @@
 .table__name {
   color: white;
   width: fit-content;
-  margin: 0;
+  margin: 0 10px;
   width: 100%;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .table__header {
   width: 100%;
-  background: #15386c;
+  background: #f57f29;
   align-items: center;
+  border-radius: 4px;
 }
 
 .table__row_wrong {
@@ -32,7 +35,7 @@
   align-items: center;
   gap: 5px;
   padding: 3px 3px 6px;
-  border-bottom: 2px solid #15386c;
+  border-bottom: 2px solid #f57f29;
 }
 
 .table__cell_field {

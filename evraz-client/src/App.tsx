@@ -4,20 +4,17 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import { Provider } from "react-redux";
 import { store } from "./redux";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Tooltip } from "react-bootstrap";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routing/routing";
 import { OpenFormToast } from "./components/toasts";
 import { OperationMoveForm } from "./components/operation-forms/move-form";
-import ws from './ws/websocket'
+import ws from "./ws/websocket";
 
-ws()
+ws();
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 function App() {
   return (

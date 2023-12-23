@@ -2,8 +2,8 @@ import Form from "react-bootstrap/esm/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 
-import styles from './station-page-content.module.css'
-import { OperationListModal } from '../modals/operation-list';
+import styles from "./station-page-content.module.css";
+import { OperationListModal } from "../modals/operation-list";
 
 export function OptionsBar() {
   const [storyIsOpen, setStoryIsOpen] = useState(false);
