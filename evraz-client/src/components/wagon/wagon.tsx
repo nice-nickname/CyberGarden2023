@@ -2,6 +2,7 @@ import { useDrag } from "react-dnd";
 
 import styles from "./wagon.module.css";
 import { Button, OverlayTrigger, Popover } from "react-bootstrap";
+import trainDefaultIcon from '../../assets/svg/train_default.svg'
 
 export interface IWagonProps {
   id: number;
@@ -42,7 +43,7 @@ export function Wagon({ id }: IWagonProps) {
 
   return (
     <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-      <div className={styles.wagon} ref={dragRef} style={{ opacity }} />
+      <img ref={dragRef} style={{ opacity }} src={trainDefaultIcon}/>
     </OverlayTrigger>
   );
 }

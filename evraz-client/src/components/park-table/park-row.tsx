@@ -21,13 +21,13 @@ export function ParkRow({ id }: IParkRowProps) {
   return (
     <div
       className={classNames(styles.table__row, {
-        [styles.table__row_wrong]: true,
+        [styles.table__row_wrong]: false,
       })}
     >
       <div className={styles.table__cell_id}>1</div>
       <div
         className={classNames(styles.table__cell_id, {
-          [styles.table__cell_id_wrong]: true,
+          [styles.table__cell_id_wrong]: false,
         })}
       >
         68 / 2

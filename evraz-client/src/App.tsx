@@ -4,13 +4,26 @@ import { DndProvider } from "react-dnd";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-bootstrap";
+import { Provider } from "react-redux";
+
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import { store } from "./redux";
+
+const queryClient = new QueryClient()
 
 function App() {
   return (
-    <DndProvider backend={HTML5Backend}>
-      <StationPage />
-      <Tooltip id="train-info" />
-    </DndProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <DndProvider backend={HTML5Backend}>
+          <StationPage />
+          <Tooltip id="train-info" />
+        </DndProvider>
+      </QueryClientProvider>
+    </Provider>
   );
 }
 
