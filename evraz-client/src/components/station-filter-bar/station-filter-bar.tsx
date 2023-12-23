@@ -20,7 +20,7 @@ export function StationFilterBar() {
   const { data } = useQuery({
     queryKey: ['get-stations'],
     queryFn: async () => {
-      const data = await axios.get(`${baseUrl}/stations`)
+      const data = await axios.get(`${baseUrl}stations`)
       return data.data
     }
   })

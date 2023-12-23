@@ -21,7 +21,7 @@ export function ParkRow({ id, stationId, parkId }: IParkRowProps) {
   const { data } = useQuery({
     queryKey: ['get-way', id],
     queryFn: async () => {
-      const response = await axios.get(`${baseUrl}/way/${id}`)
+      const response = await axios.get(`${baseUrl}way/${id}`)
       return response.data
     }
   })

@@ -14,12 +14,10 @@ export function ParkTable({ id, stationId }: IParkTableProps) {
   const { data } = useQuery({
     queryKey: ['get-park', id],
     queryFn: async () => {
-      const response = await axios.get(`${baseUrl}/park/${id}`)
+      const response = await axios.get(`${baseUrl}park/${id}`)
       return response.data
     }
   })
-
-  const a = [1, 1, 1, 1, 1, 1, 1];
 
   if (!data) {
     return null
