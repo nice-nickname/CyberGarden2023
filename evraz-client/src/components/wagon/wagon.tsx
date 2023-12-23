@@ -12,9 +12,10 @@ export interface IWagonProps {
   id: number;
   parkId: number;
   stationId: number;
+  wayId: number;
 }
 
-export const Wagon = memo(({ id, parkId, stationId }: IWagonProps) => {
+export const Wagon = memo(({ id, parkId, stationId, wayId }: IWagonProps) => {
 
   const { data } = useQuery({
     queryKey: ['get-wagon', id],
@@ -48,7 +49,7 @@ export const Wagon = memo(({ id, parkId, stationId }: IWagonProps) => {
   const [{ opacity }, dragRef] = useDrag(
     () => ({
       type: "123",
-      item: { trainFirstId: id, parkFirstId: parkId, stationFirstId: stationId },
+      item: { trainFirstId: id, parkFirstId: parkId, stationFirstId: stationId, firstWayId: wayId },
       collect: (monitor) => ({
         opacity: monitor.isDragging() ? 0 : 1,
       }),

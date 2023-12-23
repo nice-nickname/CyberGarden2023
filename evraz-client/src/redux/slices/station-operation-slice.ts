@@ -5,6 +5,8 @@ export interface IStationOperationSlice {
   type: OperationTypes | null;
   trainFirstId: number | null;
   trainSecondId: number | null;
+  wayFirstId: number | null,
+  waySecondId: number | null,
   parkFirstId: number | null;
   parkSecondId: number | null;
   stationFirstId: number | null;
@@ -15,6 +17,8 @@ export const initialState: IStationOperationSlice = {
   type: null,
   trainFirstId: null,
   trainSecondId: null,
+  wayFirstId: null,
+  waySecondId: null,
   parkFirstId: null,
   parkSecondId: null,
   stationFirstId: null,
@@ -30,6 +34,8 @@ export const stationOperationSlice = createSlice({
       state.trainFirstId =  Number(payload.trainFirstId);
       state.type = OperationTypes.MOVE
       state.trainSecondId =  Number(payload.trainFirstId);
+      state.wayFirstId = payload.wayFirstId
+      state.waySecondId = payload.waySecondId
       state.parkFirstId = payload.parkFirstId
       state.parkSecondId = payload.parkSecondId
       state.stationFirstId = payload.stationFirstId
