@@ -3,12 +3,13 @@ import { operationReasons, operationTypes } from "../../../mock"
 import { Select } from "../../inputs/select"
 import { FormEventHandler, useEffect, useState } from "react"
 import axios from "axios"
+import { baseUrl } from "../../../consts"
 
 export interface IOperationMoveFormProps {
-  show: boolean
+  
 }
 
-function OperationMoveForm({ show: false }: IOperationMoveFormProps) {
+function OperationMoveForm({  }: IOperationMoveFormProps) {
 
   const operationTypeId = 2
 
@@ -19,9 +20,9 @@ function OperationMoveForm({ show: false }: IOperationMoveFormProps) {
 
   useEffect(() => {
     
-    if (show === true) {
-      axios.get('https://d27e-83-97-115-19.ngrok-free.app/forms/createForm')
-        .then(res => console.log(res.data))
+    if (show === true && formId === null) {
+      axios.get(`${baseUrl}forms/createForm`)
+        .then(res => console.log('ahaha', res.data))
     }
     else {
       setFormId(null)
@@ -39,7 +40,7 @@ function OperationMoveForm({ show: false }: IOperationMoveFormProps) {
   }
 
   return (
-    <Modal show={show && formId !== null} onHide={handleClose} size="lg">
+    <Modal show={show} onHide={handleClose} size="lg">
       <Modal.Header closeButton>
         Операция №{formId}
       </Modal.Header>
