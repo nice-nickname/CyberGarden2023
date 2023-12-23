@@ -20,7 +20,7 @@ export const Wagon = memo(({ id, parkId, stationId, wayId }: IWagonProps) => {
   const { data } = useQuery({
     queryKey: ['get-wagon'],
     queryFn: async () => {
-      const response = await axios.get(`${baseUrl}/wagon/${id}`)
+      const response = await axios.get(`${baseUrl}wagon/${id}`)
       return response.data
     }
   })

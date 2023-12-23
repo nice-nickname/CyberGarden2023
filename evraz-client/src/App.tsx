@@ -11,8 +11,8 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { store } from "./redux";
-import { OperationModal } from "./components/operation-forms";
-import { OperationMoveForm } from "./components/operation-forms/move-form";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routing/routing";
 
 const queryClient = new QueryClient()
 
@@ -21,7 +21,7 @@ function App() {
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <DndProvider backend={HTML5Backend}>
-          <StationPage />
+          <RouterProvider router={router} />
           <Tooltip id="train-info" />
         </DndProvider>
       </QueryClientProvider>
