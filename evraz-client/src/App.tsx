@@ -14,6 +14,10 @@ import { store } from "./redux";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routing/routing";
 
+import ws from './ws/websocket'
+
+ws()
+
 const queryClient = new QueryClient()
 
 function App() {
