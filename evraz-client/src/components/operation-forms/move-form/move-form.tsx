@@ -94,13 +94,13 @@ function OperationMoveForm({  }: IOperationMoveFormProps) {
           <Row className='mb-3'>
             <Col className='d-flex gap-2' xs={8}>
               <div>
-                {stationFirstData?.title}, Парк {parkFirstData?.name}, путь ({wayFirstData?.name})
+                {stationFirstData?.title}, Парк {parkFirstData?.name}, путь ({wayFirstData?.title})
               </div>
               <div>
                 →
               </div>
               <div>
-              {stationSecondData?.title}, Парк {parkSecondData?.name}, путь ({waySecondData?.name})
+              {stationSecondData?.title}, Парк {parkSecondData?.name}, путь ({waySecondData?.title})
               </div>
             </Col>
           </Row>
