@@ -40,7 +40,7 @@
 
 .table__cell_field {
   border: 1px solid #818181;
-  height: 50px;
+  min-height: 50px;
   border-radius: 4px;
   padding: 3px;
 

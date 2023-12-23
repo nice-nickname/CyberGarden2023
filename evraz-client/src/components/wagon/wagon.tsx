@@ -7,6 +7,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { baseUrl, ownerColors } from "../../consts";
 import { getTrainIconByType } from "../../utils/get-icon-by-type";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux";
 
 export interface IWagonProps {
   id: number;
@@ -23,6 +25,8 @@ export const Wagon = memo(({ id, parkId, stationId, wayId }: IWagonProps) => {
       return response.data;
     },
   });
+
+  const numberFilter = useSelector((state: RootState) => state.filterStationReducer.wihtNumber)
 
   const popover = (
     <Popover id="popover-basic">
@@ -76,11 +80,13 @@ export const Wagon = memo(({ id, parkId, stationId, wayId }: IWagonProps) => {
   if (!data) {
     return null;
   }
-
   return (
     <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-      <div ref={dragRef} style={{ opacity }}>
-        {getTrainIconByType(data.type, color ?? undefined)}
+      <div className={styles.wagon_full}>
+        {numberFilter && <p className={styles.wagon__number}>{data?.inventoryNumber}</p>}
+        <div ref={dragRef} style={{ opacity }}>
+          {getTrainIconByType(data.type, color ?? undefined)}
+        </div>
       </div>
     </OverlayTrigger>
   );

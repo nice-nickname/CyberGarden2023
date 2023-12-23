@@ -6,7 +6,8 @@ import { setMoveTrain } from "../../redux/slices/station-operation-slice";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { baseUrl } from "../../consts";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux";
 
 export interface IParkRowProps {
   id: number;
@@ -16,6 +17,8 @@ export interface IParkRowProps {
 
 export function ParkRow({ id, stationId, parkId }: IParkRowProps) {
   const dispatch = useDispatch();
+
+  const linesFilter = useSelector((state: RootState) => state.filterStationReducer.allLines)
 
   const { data } = useQuery({
     queryKey: ["get-way", id],
@@ -40,7 +43,7 @@ export function ParkRow({ id, stationId, parkId }: IParkRowProps) {
     },
   }));
 
-  if (!data) {
+  if (!data || (!linesFilter && !data.wagonsCount)) {
     return null;
   }
 
