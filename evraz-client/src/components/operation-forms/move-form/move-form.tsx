@@ -8,6 +8,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../../redux"
 import { OperationTypes } from "../../../types"
 import { useQuery } from "@tanstack/react-query"
+import moment from "moment"
 
 export interface IOperationMoveFormProps {
   
@@ -27,6 +28,8 @@ function OperationMoveForm({  }: IOperationMoveFormProps) {
     stationFirstId,
     stationSecondId,
     trainFirstId,
+    wayFirstId,
+    waySecondId,
     type
   } = useSelector((state: RootState) => state.stationOperationReducer)
 
@@ -51,11 +54,11 @@ function OperationMoveForm({  }: IOperationMoveFormProps) {
   })
 
   const { data: wayFirstData } = useQuery({
-    queryKey: ['get-way', parkFirstId]
+    queryKey: ['get-way', wayFirstId]
   })
 
   const { data: waySecondData } = useQuery({
-    queryKey: ['get-way', parkSecondId]
+    queryKey: ['get-way', waySecondId]
   })
 
   useEffect(() => {
@@ -92,15 +95,15 @@ function OperationMoveForm({  }: IOperationMoveFormProps) {
           </Row>
 
           <Row className='mb-3'>
-            <Col className='d-flex gap-2' xs={8}>
+            <Col className='d-flex gap-2' xs={10}>
               <div>
-                {stationFirstData?.title}, Парк {parkFirstData?.name}, путь ({wayFirstData?.title})
+                {stationFirstData?.title}, Парк {parkFirstData?.name}, путь ({wayFirstData?.name})
               </div>
               <div>
                 →
               </div>
               <div>
-              {stationSecondData?.title}, Парк {parkSecondData?.name}, путь ({waySecondData?.title})
+              {stationSecondData?.title}, Парк {parkSecondData?.name}, путь ({waySecondData?.name})
               </div>
             </Col>
           </Row>
@@ -108,7 +111,7 @@ function OperationMoveForm({  }: IOperationMoveFormProps) {
           <Row>
             <FormGroup as={Col}>
               <Form.Label>Начало операции</Form.Label>
-              <Form.Control type="datetime-local" />
+              <Form.Control type="datetime-local" value={moment().toLocaleString()} />
             </FormGroup>
             <FormGroup as={Col}>
               <Form.Label>Окончание операции</Form.Label>

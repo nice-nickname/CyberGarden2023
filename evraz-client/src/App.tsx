@@ -13,6 +13,9 @@ import {
 import { store } from "./redux";
 import { OperationMoveForm } from "./components/operation-forms/move-form";
 
+import ws from './ws/websocket'
+
+ws()
 
 const queryClient = new QueryClient()
 
