@@ -28,10 +28,11 @@
 
 .table__row {
   display: grid;
-  grid-template-columns: 50px 50px 50px 1fr 50px;
+  grid-template-columns: 150px 50px 50px 1fr 50px;
   align-items: center;
   gap: 5px;
-  padding: 3px 3px;
+  padding: 3px 3px 6px;
+  border-bottom: 2px solid #15386c;
 }
 
 .table__cell_field {

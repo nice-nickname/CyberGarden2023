@@ -1,28 +1,28 @@
 import { useDrag } from "react-dnd";
+import { memo } from 'react'
 
 import styles from "./wagon.module.css";
 import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 import trainDefaultIcon from '../../assets/svg/train_default.svg'
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { baseUrl } from "../../consts";
 
 export interface IWagonProps {
   id: number;
+  parkId: number;
+  stationId: number;
 }
 
-export function Wagon({ id }: IWagonProps) {
+export const Wagon = memo(({ id, parkId, stationId }: IWagonProps) => {
 
   const { data } = useQuery({
     queryKey: ['get-wagon'],
     queryFn: async () => {
-      const response = await axios.get(`https://0a4b-83-97-115-37.ngrok-free.app/wagon/${id}`)
+      const response = await axios.get(`${baseUrl}/wagon/${id}`)
       return response.data
     }
   })
-
-  if(!data) {
-    return null
-  }
 
   const popover = (
     <Popover id="popover-basic">
@@ -45,20 +45,24 @@ export function Wagon({ id }: IWagonProps) {
     </Popover>
   );
 
-  // const [{ opacity }, dragRef] = useDrag(
-  //   () => ({
-  //     type: "123",
-  //     item: { id },
-  //     collect: (monitor) => ({
-  //       opacity: monitor.isDragging() ? 0 : 1,
-  //     }),
-  //   }),
-  //   [],
-  // );
+  const [{ opacity }, dragRef] = useDrag(
+    () => ({
+      type: "123",
+      item: { trainFirstId: id, parkFirstId: parkId, stationFirstId: stationId },
+      collect: (monitor) => ({
+        opacity: monitor.isDragging() ? 0 : 1,
+      }),
+    }),
+    [],
+  );
+
+  if(!data) {
+    return null
+  }
 
   return (
     <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-      <img src={trainDefaultIcon}/>
+      <img ref={dragRef} style={{opacity}} src={trainDefaultIcon}/>
     </OverlayTrigger>
   );
-}
+})
