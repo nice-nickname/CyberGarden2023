@@ -29,7 +29,7 @@ export function StationFilterBar() {
     dispatch(setStation({id: target.value}))
   }, [dispatch])
 
-  if(!data) {
+  if (!data) {
     return null
   }
 
