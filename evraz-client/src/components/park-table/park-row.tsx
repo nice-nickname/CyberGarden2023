@@ -14,7 +14,7 @@ export function ParkRow({ id }: IParkRowProps) {
   const [, drop] = useDrop(() => ({
     accept: "123",
     drop: (data: any) => {
-      setMoveTrain({trainFirstId: data.id, trainSecondId: id });
+      setMoveTrain({ trainFirstId: data.id, trainSecondId: id });
     },
   }));
 
