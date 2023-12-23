@@ -11,6 +11,7 @@ import {
 } from '@tanstack/react-query'
 import { useDispatch } from "react-redux";
 import { setStation } from "../../redux/slices/station-slice";
+import { baseUrl } from "../../consts";
 
 export function StationFilterBar() {
 
@@ -19,7 +20,7 @@ export function StationFilterBar() {
   const { data } = useQuery({
     queryKey: ['get-stations'],
     queryFn: async () => {
-      const data = await axios.get('https://0a4b-83-97-115-37.ngrok-free.app/stations')
+      const data = await axios.get(`${baseUrl}/stations`)
       return data.data
     }
   })
