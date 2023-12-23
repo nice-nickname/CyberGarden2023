@@ -21,11 +21,8 @@ function App() {
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <DndProvider backend={HTML5Backend}>
-          {/* <StationPage />
-          <Tooltip id="train-info" /> */}
-          <OperationModal state={true} title="Выполнение операции" onSave={() => {}} formId="">
-            <OperationMoveForm formId="" vagonNumber="123" />
-          </OperationModal>
+          <StationPage />
+          <Tooltip id="train-info" />
         </DndProvider>
       </QueryClientProvider>
     </Provider>
