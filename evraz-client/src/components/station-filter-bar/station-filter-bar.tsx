@@ -9,8 +9,12 @@ import axios from "axios";
 import {
   useQuery
 } from '@tanstack/react-query'
+import { useDispatch } from "react-redux";
+import { setStation } from "../../redux/slices/station-slice";
 
 export function StationFilterBar() {
+
+  const dispatch = useDispatch()
 
   const { data } = useQuery({
     queryKey: ['get-stations'],
@@ -19,48 +23,24 @@ export function StationFilterBar() {
       return data.data
     }
   })
-  const [stations, setStations] = useState(
-    stationsMock.map((station) => ({ ...station, state: false })),
-  );
-
-  const onClickOption = ({ target }: any) => {
-    setStations((prev) => {
-      const index = prev.findIndex(
-        (station: TStation) => Number(station.id) === Number(target.value),
-      );
-      prev[index].state = !prev[index].state;
-      console.log(prev, index, target.value);
-      return [...prev];
-    });
-  };
-
-  const filteredStations = useMemo(
-    () => stations.filter((station) => station.state),
-    [stations],
-  );
+  
+  const onChangeStation = useCallback(({target}: any) => {
+    dispatch(setStation({id: target.value}))
+  }, [dispatch])
 
   if (!data) {
     return null
   }
 
-
   return (
     <div className={styles.bar}>
-      <Form.Select className={styles.bar_select} onChange={onClickOption}>
+      <Form.Select className={styles.bar_select} onChange={onChangeStation}>
         {data.map((station: TStation) => (
           <option key={station.id} value={station.id}>
             {station.title}
           </option>
         ))}
       </Form.Select>
-      <div className={styles.bar__selected}>
-        {filteredStations.map((station) => (
-          <div key={station.id} className={styles.bar__item}>
-            <p className={styles.bar__name_item}>{station.name}</p>
-            <img src={closeIcon} alt="close" />
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
