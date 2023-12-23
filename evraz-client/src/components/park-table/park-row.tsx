@@ -29,7 +29,7 @@ export function ParkRow({ id, stationId, parkId }: IParkRowProps) {
   const [, drop] = useDrop(() => ({
     accept: "123",
     drop: (data: any) => {
-      dispatch(setMoveTrain({ ...data, trainSecondId: id, parkSecondId: parkId, stationSecondId: stationId }));
+      dispatch(setMoveTrain({ ...data, trainSecondId: id, parkSecondId: parkId, stationSecondId: stationId, waySecondId: id }));
     },
   }));
 
@@ -53,8 +53,8 @@ export function ParkRow({ id, stationId, parkId }: IParkRowProps) {
       </div>
       <div className={styles.table__cell_field}></div>
       <div className={styles.table__cell_field} ref={drop}>
-        {data.wagonsIds.map((id: number) => (
-          <Wagon key={id} id={id} stationId={stationId} parkId={parkId}/>
+        {data.wagonsIds.map((wagonId: number) => (
+          <Wagon key={wagonId} id={wagonId} stationId={stationId} parkId={parkId} wayId={id}/>
         ))}
       </div>
       <div className={styles.table__cell_field}></div>
