@@ -1,4 +1,4 @@
 export type TStation = {
-    id: number,
-    name: string,
-}
+  id: number;
+  name: string;
+};

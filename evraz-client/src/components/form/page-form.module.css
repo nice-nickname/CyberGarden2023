@@ -1,18 +1,18 @@
 .form {
-    width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-    background: white;
-    box-shadow: 0 0 2px 2px #0000008f;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 2px 2px #0000008f;
 }
 
 .form__header {
-    background: rgb(235, 235, 235);
-    text-align: start;
-    padding: 0 20px;
-    box-sizing: border-box;
+  background: rgb(235, 235, 235);
+  text-align: start;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .form__content {
-    padding: 10px;
+  padding: 10px;
 }

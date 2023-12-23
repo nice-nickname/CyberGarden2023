@@ -1,1 +1,1 @@
-export * from './owner-bar'
+export * from "./owner-bar";
