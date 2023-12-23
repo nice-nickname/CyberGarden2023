@@ -39,7 +39,7 @@ export function StationFilterBar() {
     [stations],
   );
 
-  if(!data) {
+  if (!data) {
     return null
   }
 

@@ -11,6 +11,8 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { store } from "./redux";
+import { OperationModal } from "./components/operation-forms";
+import { OperationMoveForm } from "./components/operation-forms/move-form";
 
 const queryClient = new QueryClient()
 
@@ -19,8 +21,11 @@ function App() {
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <DndProvider backend={HTML5Backend}>
-          <StationPage />
-          <Tooltip id="train-info" />
+          {/* <StationPage />
+          <Tooltip id="train-info" /> */}
+          <OperationModal state={true} title="Выполнение операции" onSave={() => {}} formId="">
+            <OperationMoveForm formId="" vagonNumber="123" />
+          </OperationModal>
         </DndProvider>
       </QueryClientProvider>
     </Provider>

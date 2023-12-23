@@ -19,8 +19,11 @@ function OperationMoveForm({ formId, vagonNumber }: IOperationMoveFormProps) {
             ev.preventDefault()
 
         }}>
-            <Row>
-                <h5>Перемещение вагона №{vagonNumber}</h5>
+            <Row className='mb-1'>
+              <h5>Перемещение вагона №{vagonNumber}</h5>
+            </Row>
+            
+            <Row className='mb-3'>
                 <Col className='d-flex gap-2' xs={8}>
                     <div>
                         Бебра, Парк Аахха, путь (XX)
@@ -32,6 +35,17 @@ function OperationMoveForm({ formId, vagonNumber }: IOperationMoveFormProps) {
                         Бебриус, парк Привеее, путь (PP)
                     </div>
                 </Col>
+            </Row>
+
+            <Row>
+              <FormGroup as={Col}>
+                <Form.Label>Начало операции</Form.Label>
+                <Form.Control type="datetime-local" />
+              </FormGroup>
+              <FormGroup as={Col}>
+                <Form.Label>Окончание операции</Form.Label>
+                <Form.Control type="datetime-local" />
+              </FormGroup>
             </Row>
 
             <Row className='pt-2 mt-3 mb-3 border-top'>
