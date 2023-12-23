@@ -1,81 +1,119 @@
-import { Col, Form, FormGroup, Row } from "react-bootstrap"
+import { Button, Col, Form, FormGroup, Modal, Row } from "react-bootstrap"
 import { operationReasons, operationTypes } from "../../../mock"
 import { Select } from "../../inputs/select"
+import { FormEventHandler, useEffect, useState } from "react"
+import axios from "axios"
 
 export interface IOperationMoveFormProps {
-    formId: string,
-    vagonNumber: string
+  show: boolean
 }
 
+function OperationMoveForm({ show: false }: IOperationMoveFormProps) {
 
-function OperationMoveForm({ formId, vagonNumber }: IOperationMoveFormProps) {
+  const operationTypeId = 2
 
-    const operationTypeId = 2
+  const operations = operationTypes.find(s => s.id === operationTypeId)?.operations || []
 
-    const operations = operationTypes.find(s => s.id === operationTypeId)?.operations || []
+  const [show, setShow] = useState(false)
+  const [formId, setFormId] = useState<string | null>(null)
 
-    return (
-        <Form id={formId} onSubmit={(ev) => {
-            ev.preventDefault()
+  useEffect(() => {
+    
+    if (show === true) {
+      axios.get('https://d27e-83-97-115-19.ngrok-free.app/forms/createForm')
+        .then(res => console.log(res.data))
+    }
+    else {
+      setFormId(null)
+    }
 
-        }}>
-            <Row className='mb-1'>
-              <h5>Перемещение вагона №{vagonNumber}</h5>
-            </Row>
-            
-            <Row className='mb-3'>
-                <Col className='d-flex gap-2' xs={8}>
-                    <div>
-                        Бебра, Парк Аахха, путь (XX)
-                    </div>
-                    <div>
-                        →
-                    </div>
-                    <div>
-                        Бебриус, парк Привеее, путь (PP)
-                    </div>
-                </Col>
-            </Row>
+  }, [show])
 
-            <Row>
-              <FormGroup as={Col}>
-                <Form.Label>Начало операции</Form.Label>
-                <Form.Control type="datetime-local" />
-              </FormGroup>
-              <FormGroup as={Col}>
-                <Form.Label>Окончание операции</Form.Label>
-                <Form.Control type="datetime-local" />
-              </FormGroup>
-            </Row>
+  const handleClose = () => setShow(false)
 
-            <Row className='pt-2 mt-3 mb-3 border-top'>
-                <FormGroup as={Col}>
-                    <Form.Label>Тип операции</Form.Label>
-                    <Select selected={operationTypeId} disabled data={operationTypes} mapper={i => ({
-                        value: i.id,
-                        text: i.name
-                    })} />
-                </FormGroup>
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (ev) => {
+    ev.stopPropagation()
+    ev.preventDefault()
 
-                <FormGroup as={Col}>
-                    <Form.Label>Операция</Form.Label>
-                    <Select selected={6} disabled data={operations} mapper={i => ({
-                        value: i.id,
-                        text: i.name
-                    })} />
-                </FormGroup>
+    console.log('submit')
+  }
 
-                <FormGroup as={Col}>
-                    <Form.Label>Причина</Form.Label>
-                    <Select selected={6} data={operationReasons} mapper={i => ({
-                        value: i.id,
-                        text: i.title
-                    })} />
-                    
-                </FormGroup>
-            </Row>
+  return (
+    <Modal show={show && formId !== null} onHide={handleClose} size="lg">
+      <Modal.Header closeButton>
+        Операция №{formId}
+      </Modal.Header>
+
+      <Modal.Body>
+        <Form id='form-move-wagon' onSubmit={handleSubmit}>
+          <Row className='mb-1'>
+            <h5>Перемещение вагона №{'1488'}</h5>
+          </Row>
+
+          <Row className='mb-3'>
+            <Col className='d-flex gap-2' xs={8}>
+              <div>
+                Бебра, Парк Аахха, путь (XX)
+              </div>
+              <div>
+                →
+              </div>
+              <div>
+                Бебриус, парк Привеее, путь (PP)
+              </div>
+            </Col>
+          </Row>
+
+          <Row>
+            <FormGroup as={Col}>
+              <Form.Label>Начало операции</Form.Label>
+              <Form.Control type="datetime-local" />
+            </FormGroup>
+            <FormGroup as={Col}>
+              <Form.Label>Окончание операции</Form.Label>
+              <Form.Control type="datetime-local" />
+            </FormGroup>
+          </Row>
+
+          <Row className='pt-2 mt-3 mb-3 border-top'>
+            <FormGroup as={Col}>
+              <Form.Label>Тип операции</Form.Label>
+              <Select selected={operationTypeId} disabled data={operationTypes} mapper={i => ({
+                value: i.id,
+                text: i.name
+              })} />
+            </FormGroup>
+
+            <FormGroup as={Col}>
+              <Form.Label>Операция</Form.Label>
+              <Select selected={6} disabled data={operations} mapper={i => ({
+                value: i.id,
+                text: i.name
+              })} />
+            </FormGroup>
+
+            <FormGroup as={Col}>
+              <Form.Label>Причина</Form.Label>
+              <Select selected={6} data={operationReasons} mapper={i => ({
+                value: i.id,
+                text: i.title
+              })} />
+
+            </FormGroup>
+          </Row>
         </Form>
-    )
+      </Modal.Body>
+
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Закрыть
+        </Button>
+        <Button variant="primary" type="submit" form='form-move-wagon'>
+          Сохранить
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  )
 }
 
 export { OperationMoveForm }

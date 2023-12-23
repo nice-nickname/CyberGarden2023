@@ -4,15 +4,16 @@ import { DndProvider } from "react-dnd";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-bootstrap";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 
 import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import { store } from "./redux";
+import { RootState, store } from "./redux";
 import { OperationModal } from "./components/operation-forms";
 import { OperationMoveForm } from "./components/operation-forms/move-form";
+import { FC } from "react";
 
 const queryClient = new QueryClient()
 
@@ -21,11 +22,8 @@ function App() {
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <DndProvider backend={HTML5Backend}>
-          {/* <StationPage />
-          <Tooltip id="train-info" /> */}
-          <OperationModal state={true} title="Выполнение операции" onSave={() => {}} formId="">
-            <OperationMoveForm formId="" vagonNumber="123" />
-          </OperationModal>
+          <StationPage />
+          <Tooltip id="train-info" />
         </DndProvider>
       </QueryClientProvider>
     </Provider>
