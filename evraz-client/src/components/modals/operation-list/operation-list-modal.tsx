@@ -1,6 +1,5 @@
 import { Modal } from "react-bootstrap"
-import OperationList from "../../operation-list/OperationList"
-import { useState } from "react";
+import { OperationList } from "../../operation-list"
 
 export interface IOperationListModalProps {
     onClose: () => void,
@@ -21,4 +20,4 @@ function OperationListModal({ onClose, state }: IOperationListModalProps) {
     )
 }
 
-export default OperationListModal
+export { OperationListModal }

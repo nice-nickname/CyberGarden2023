@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import { useState } from 'react'
 
 import styles from './station-page-content.module.css'
-import OperationListModal from '../modals/operation-list/OperationListModal';
+import { OperationListModal } from '../modals/operation-list';
 
 export function OptionsBar() {
 

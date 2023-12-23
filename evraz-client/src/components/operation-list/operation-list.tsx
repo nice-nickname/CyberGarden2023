@@ -45,4 +45,4 @@ function OperationList() {
     )
 }
 
-export default OperationList
+export { OperationList }
