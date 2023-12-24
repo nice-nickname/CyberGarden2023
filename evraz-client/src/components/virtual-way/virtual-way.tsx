@@ -1,16 +1,20 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { baseUrl } from "../../consts";
 import { StationTable } from "../station-table/station-table";
 
 import styles from './virtual-way.module.css'
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { Button } from "react-bootstrap";
+import { ApproveForm } from "./approve-form";
 
 export interface IVirtualWayProps {
     id: number
 }
 
 export function VirtualWay({ id }: IVirtualWayProps) {
+
+    const [state, setState] = useState(false)
 
     const { data } = useQuery({
         queryKey: ["get-merge", id],
@@ -37,7 +41,11 @@ export function VirtualWay({ id }: IVirtualWayProps) {
 
     return (
         <div className={styles.station_list}>
-            <p className={styles.title}>Форма {id}</p>
+            <ApproveForm id={id} state={state} onClose={() => {setState(false)}}/>
+            <div className={styles.form__header}>
+                <p className={styles.title}>Форма {id}</p>
+                <Button style={{background: '#f57f29'}} onClick={() => {setState(true)}}>Одобрить</Button>
+            </div>
             {stationArray.map((station: any) => <StationTable id={station.id} ways={station.ways} key={station.id}/>)}
         </div>
     )

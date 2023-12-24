@@ -2,6 +2,12 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+
+    padding: 10px;
+    box-sizing: border-box;
+    background: #fcb53b33;
+    border-radius: 8px;
+    border: 2px dashed #e32213;
 }
 
 .title {
@@ -9,4 +15,11 @@
     font-weight: bold;
     line-height: 18px;
     margin: 0;
+  }
+
+  .form__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
