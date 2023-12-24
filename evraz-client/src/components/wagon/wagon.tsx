@@ -8,16 +8,19 @@ import axios from "axios";
 import { baseUrl, ownerColors } from "../../consts";
 import { getTrainIconByType } from "../../utils/get-icon-by-type";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux";
+import { RootState, store } from "../../redux";
+import { addWagon, setWagon } from "../../redux/slices/wagon-dnd-slice";
+import classNames from "classnames";
 
 export interface IWagonProps {
   id: number;
   parkId?: number;
   stationId?: number;
   wayId?: number;
+  active: boolean
 }
 
-export const Wagon = memo(({ id, parkId, stationId, wayId }: IWagonProps) => {
+export const Wagon = memo(({ id, parkId, stationId, wayId, active }: IWagonProps) => {
   const { data } = useQuery({
     queryKey: ["get-wagon", id],
     queryFn: async () => {
@@ -44,9 +47,13 @@ export const Wagon = memo(({ id, parkId, stationId, wayId }: IWagonProps) => {
     </Popover>
   );
 
-  // const onClickWagon = useCallback(() => {
-
-  // }, [])
+  const onClickWagon = useCallback((event: any) => {
+    if(event.ctrlKey) {
+      store.dispatch(addWagon({id, wayId, parkId, stationId}))
+      return 
+    }
+    store.dispatch(setWagon({id, wayId, parkId, stationId}))
+  }, [id, wayId, parkId, stationId])
 
   const [{ opacity }, dragRef] = useDrag(
     () => ({
@@ -77,12 +84,16 @@ export const Wagon = memo(({ id, parkId, stationId, wayId }: IWagonProps) => {
   if (!data) {
     return null;
   }
+
+  console.log(data)
   return (
     <OverlayTrigger placement="right" overlay={popover} delay={2000}>
-      <div className={styles.wagon_full}>
+      <div className={classNames(styles.wagon_full, {
+        [styles.wagon__full_active]: active,
+      })} onClick={onClickWagon}>
         {numberFilter && <p className={styles.wagon__number}>{data?.inventoryNumber}</p>}
         <div ref={dragRef} style={{ opacity }}>
-          {getTrainIconByType(data.type, color ?? undefined)}
+          {getTrainIconByType(data.type, data.isSick, color ?? undefined)}
         </div>
       </div>
     </OverlayTrigger>

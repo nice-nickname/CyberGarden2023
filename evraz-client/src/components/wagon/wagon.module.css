@@ -17,10 +17,18 @@
   flex-direction: column;
   gap: 5px;
   align-items: center;
+  justify-content: center;
+  padding: 3px;
 }
 
 .wagon__number {
   font-size: 10px;
   margin: 0;
   line-height: 10px;
+}
+
+.wagon__full_active {
+  border: 1px dashed #e32213;
+  border-radius: 4px;
+  background: #fcb53b5f;
 }

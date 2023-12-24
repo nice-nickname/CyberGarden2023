@@ -5,10 +5,10 @@ import {
   TrainTank,
 } from "../assets/svg/trains";
 
-export const getTrainIconByType = (type: string, color?: string) => {
+export const getTrainIconByType = (type: string, isSick: boolean, color?: string) => {
   switch (type) {
     case "RollPlatform":
-      return <TrainPlatformRoll color={color} />;
+      return <TrainPlatformRoll isSick color={color} />;
     case "HalfCarriage":
       return <TrainDefault color={color} />;
     case "Hopper":
