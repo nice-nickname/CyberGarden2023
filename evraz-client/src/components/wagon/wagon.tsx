@@ -1,5 +1,5 @@
 import { useDrag } from "react-dnd";
-import { memo, useMemo } from "react";
+import { memo, useCallback, useMemo } from "react";
 
 import styles from "./wagon.module.css";
 import { Button, OverlayTrigger, Popover } from "react-bootstrap";
@@ -12,9 +12,9 @@ import { RootState } from "../../redux";
 
 export interface IWagonProps {
   id: number;
-  parkId: number;
-  stationId: number;
-  wayId: number;
+  parkId?: number;
+  stationId?: number;
+  wayId?: number;
 }
 
 export const Wagon = memo(({ id, parkId, stationId, wayId }: IWagonProps) => {
@@ -30,24 +30,23 @@ export const Wagon = memo(({ id, parkId, stationId, wayId }: IWagonProps) => {
 
   const popover = (
     <Popover id="popover-basic">
-      <Popover.Header as="h3">Вагон № {id}</Popover.Header>
+      <Popover.Header as="h3">Вагон № {data?.inventoryNumber}</Popover.Header>
       <Popover.Body>
         <div className={styles.field}>
           <p>Простой по станции</p>
-          <p>1</p>
+          <p>{data?.idleDaysLength}</p>
         </div>
         <div className={styles.field}>
           <p>Собственник</p>
-          <p>1</p>
+          <p>{data?.owner}</p>
         </div>
-        <div className={styles.field}>
-          <p>Арендатор</p>
-          <p>1</p>
-        </div>
-        <Button>История операций</Button>
       </Popover.Body>
     </Popover>
   );
+
+  // const onClickWagon = useCallback(() => {
+
+  // }, [])
 
   const [{ opacity }, dragRef] = useDrag(
     () => ({
@@ -79,7 +78,7 @@ export const Wagon = memo(({ id, parkId, stationId, wayId }: IWagonProps) => {
     return null;
   }
   return (
-    <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+    <OverlayTrigger placement="right" overlay={popover}>
       <div className={styles.wagon_full}>
         {numberFilter && <p className={styles.wagon__number}>{data?.inventoryNumber}</p>}
         <div ref={dragRef} style={{ opacity }}>

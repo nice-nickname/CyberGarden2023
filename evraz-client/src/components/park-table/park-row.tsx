@@ -2,12 +2,14 @@ import classNames from "classnames";
 import { Wagon } from "../wagon";
 import styles from "./park-table.module.css";
 import { useDrop } from "react-dnd";
+import { useMemo } from "react";
 import { setMoveTrain } from "../../redux/slices/station-operation-slice";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { baseUrl } from "../../consts";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
+import { Locomotive } from "../locomotive";
 
 export interface IParkRowProps {
   id: number;
@@ -27,6 +29,16 @@ export function ParkRow({ id, stationId, parkId }: IParkRowProps) {
       return response.data;
     },
   });
+
+  const { rightLocomotive, leftLocomotive } = useMemo(() => {
+    if(!data) {
+      return { rightLocomotive: null, leftLocomotive: null }
+    }
+    return {
+      rightLocomotive: data?.locomotives?.find((l: any) => l.direction = 'RIGHT'),
+      leftLocomotive: data?.locomotives?.find((l: any) => l.direction = 'LEFT'),
+    }
+  }, [data])
 
   const [, drop] = useDrop(() => ({
     accept: "123",
@@ -61,7 +73,7 @@ export function ParkRow({ id, stationId, parkId }: IParkRowProps) {
       >
         {data.wagonsCount}/{data.maxCarriagesCount}
       </div>
-      <div className={styles.table__cell_field}></div>
+      <div className={classNames(styles.table__cell_field, styles.table__cell_field_l)}>{leftLocomotive && <Locomotive />}</div>
       <div className={styles.table__cell_field} ref={drop}>
         {data.wagonsIds.map((wagonId: number) => (
           <Wagon
@@ -73,7 +85,7 @@ export function ParkRow({ id, stationId, parkId }: IParkRowProps) {
           />
         ))}
       </div>
-      <div className={styles.table__cell_field}></div>
+      <div className={classNames(styles.table__cell_field, styles.table__cell_field_l)}>{rightLocomotive && <Locomotive />}</div>
     </div>
   );
 }

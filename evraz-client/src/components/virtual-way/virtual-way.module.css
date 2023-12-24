@@ -1,0 +1,12 @@
+.station_list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 18px;
+    margin: 0;
+  }
