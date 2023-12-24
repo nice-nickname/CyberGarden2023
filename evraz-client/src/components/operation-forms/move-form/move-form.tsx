@@ -5,10 +5,11 @@ import { FormEventHandler, useEffect, useState } from "react"
 import axios from "axios"
 import { baseUrl } from "../../../consts"
 import { useSelector } from "react-redux"
-import { RootState } from "../../../redux"
+import { RootState, store } from "../../../redux"
 import { OperationTypes } from "../../../types"
 import { useQuery } from "@tanstack/react-query"
 import moment from "moment"
+import { clearOperation } from "../../../redux/slices/station-operation-slice"
 
 
 function OperationMoveForm() {
@@ -61,7 +62,7 @@ function OperationMoveForm() {
   });
 
   useEffect(() => {
-    if (type === OperationTypes.MOVE) {
+    if (type === OperationTypes.MOVE && formId == null) {
       axios
         .get(`${baseUrl}forms/createForm`)
         .then((res) => setFormId(res.data.formId));
@@ -70,7 +71,10 @@ function OperationMoveForm() {
     }
   }, [type]);
 
-  const handleClose = () => setFormId(null);
+  const handleClose = () => {
+    setFormId(null)
+    store.dispatch(clearOperation())
+  };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (ev) => {
     ev.stopPropagation();

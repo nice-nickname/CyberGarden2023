@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { baseUrl } from "../../consts";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./station-modal.module.css";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux";
 
 export interface IStationModalProps {
   id: number | null;
@@ -20,13 +22,21 @@ export function StationModal({ id, onClose }: IStationModalProps) {
     },
   });
 
+  const navigate = useNavigate()
+
+  const allowedStation = useSelector((state: RootState) => state.authReducer.allowedStation)
+
+  const handleClick = () => {
+    navigate(`/station/${id}`)
+  }
+
   return (
     <Modal show={!!id} onHide={onClose}>
       <Modal.Header closeButton>{data?.title}</Modal.Header>
       <Modal.Footer>
-        <Link className={styles.btn} to={`/${id}`}>
+        <Button className={styles.btn} onClick={handleClick} disabled={allowedStation === id}>
           Перейти
-        </Link>
+        </Button>
       </Modal.Footer>
     </Modal>
   );

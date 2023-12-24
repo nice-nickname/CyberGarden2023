@@ -49,8 +49,6 @@ export const Wagon = memo(({ id, parkId, stationId, wayId }: IWagonProps) => {
     </Popover>
   );
 
-  console.log(data);
-
   const [{ opacity }, dragRef] = useDrag(
     () => ({
       type: "123",

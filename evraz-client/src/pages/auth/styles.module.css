@@ -1,0 +1,9 @@
+.chip {
+    text-decoration: underline;
+    color: var(--bs-secondary-color);
+    cursor: pointer;
+}
+
+.chip.active {
+    color: #FF9337;
+}

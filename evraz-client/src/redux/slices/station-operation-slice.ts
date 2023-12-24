@@ -30,7 +30,6 @@ export const stationOperationSlice = createSlice({
   initialState,
   reducers: {
     setMoveTrain: (state: IStationOperationSlice, { payload }) => {
-      console.log(payload);
       state.trainFirstId = Number(payload.trainFirstId);
       state.type = OperationTypes.MOVE;
       state.trainSecondId = Number(payload.trainFirstId);

@@ -13,6 +13,8 @@ export default function () {
   let _ = 0;
 
   connection.onmessage = ({ data }) => {
+    data = JSON.parse(data)
+    
     if (_++) {
       store.dispatch(
         addOpenForm({

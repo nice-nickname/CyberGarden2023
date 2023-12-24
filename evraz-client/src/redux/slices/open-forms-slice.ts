@@ -17,7 +17,6 @@ export const openFormsSlice = createSlice({
   initialState: initialiState,
   reducers: {
     addOpenForm: (state: IOpenFormsState, { payload }) => {
-      console.log("state", payload);
       state.formIds = payload.items;
       state.lastAction = payload.action;
     },
