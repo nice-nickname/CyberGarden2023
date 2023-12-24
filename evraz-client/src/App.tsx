@@ -22,7 +22,6 @@ function App() {
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <DndProvider backend={HTML5Backend}>
-          <Header />
           <RouterProvider router={router} />
           <Tooltip id="train-info" />
           <OperationMoveForm />

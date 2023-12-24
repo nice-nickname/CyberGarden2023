@@ -44,7 +44,7 @@ export function VirtualWay({ id }: IVirtualWayProps) {
             <ApproveForm id={id} state={state} onClose={() => {setState(false)}}/>
             <div className={styles.form__header}>
                 <p className={styles.title}>Форма {id}</p>
-                <Button style={{background: '#f57f29'}} onClick={() => {setState(true)}}>Одобрить</Button>
+                <Button style={{background: '#f57f29'}} onClick={() => {setState(true)}}>Применить</Button>
             </div>
             {stationArray.map((station: any) => <StationTable id={station.id} ways={station.ways} key={station.id}/>)}
         </div>

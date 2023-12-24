@@ -4,6 +4,7 @@ import axios from "axios";
 import { baseUrl } from "../../consts";
 import { useCallback, useState } from "react";
 import { StationModal } from "./station-modal";
+import { Header } from "../../components/header/header";
 
 export function MapPage() {
   const [choosenStation, setChoosenStation] = useState<number | null>(null);
@@ -32,6 +33,7 @@ export function MapPage() {
 
   return (
     <>
+      <Header />
       <StationModal
         id={choosenStation}
         onClose={() => setChoosenStation(null)}

@@ -75,11 +75,11 @@ export function AuthPage() {
                 </FloatingLabel>
 
                 <FloatingLabel label="Логин" className="mb-3">
-                  <Form.Control size="sm" type="email" placeholder="name@example.com" />
+                  <Form.Control size="sm" value="hello@evraz.ru" type="email" placeholder="name@example.com" />
                 </FloatingLabel>
 
                 <FloatingLabel label="Пароль" className="mb-3">
-                  <Form.Control size="sm" type="password" placeholder="Пароль" />
+                  <Form.Control size="sm" value="Mfewif234" type="password" placeholder="Пароль" />
                 </FloatingLabel>
 
                 <Row>

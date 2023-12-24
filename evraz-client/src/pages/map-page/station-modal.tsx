@@ -26,6 +26,8 @@ export function StationModal({ id, onClose }: IStationModalProps) {
 
   const allowedStation = useSelector((state: RootState) => state.authReducer.allowedStation)
 
+  const allowTransition = allowedStation === null || allowedStation === id
+
   const handleClick = () => {
     navigate(`/station/${id}`)
   }
@@ -33,8 +35,15 @@ export function StationModal({ id, onClose }: IStationModalProps) {
   return (
     <Modal show={!!id} onHide={onClose}>
       <Modal.Header closeButton>{data?.title}</Modal.Header>
+      <Modal.Body>
+        {
+          allowTransition
+            ? <>Совершить переход на данную станцию?</>
+            : <>Вы не обладаете правами для перехода на эту станцию</>
+        }
+      </Modal.Body>
       <Modal.Footer>
-        <Button className={styles.btn} onClick={handleClick} disabled={allowedStation === id}>
+        <Button variant="danger" onClick={handleClick} disabled={!allowTransition}>
           Перейти
         </Button>
       </Modal.Footer>

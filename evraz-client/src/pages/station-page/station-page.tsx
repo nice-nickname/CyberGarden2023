@@ -6,14 +6,17 @@ import { Header } from "../../components/header/header";
 
 export function StationPage() {
   return (
-    <Container style={{margin: '20px auto'}}>
-      <div className={styles.page}>
-        <PageForm>
-          <>
-            <StationPageContent />
-          </>
-        </PageForm>
-      </div>
-    </Container>
+    <>
+      <Header />
+      <Container style={{ margin: '20px auto' }}>
+        <div className={styles.page}>
+          <PageForm>
+            <>
+              <StationPageContent />
+            </>
+          </PageForm>
+        </div>
+      </Container>
+    </>
   );
 }
