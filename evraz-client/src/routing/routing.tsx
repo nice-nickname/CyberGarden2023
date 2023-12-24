@@ -5,11 +5,11 @@ import { AuthPage } from "../pages/auth/auth-page";
 
 export const router = createBrowserRouter([
   {
-    path: "/login",
+    path: "/",
     element: <AuthPage />
   },
   {
-    path: "/",
+    path: "/map",
     element: <MapPage />,
   },
   {

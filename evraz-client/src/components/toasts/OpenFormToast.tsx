@@ -13,6 +13,10 @@ export const OpenFormToast: FC = () => {
     (state: RootState) => state.openFormsReducer.lastAction,
   );
 
+  const isAdmin = useSelector(
+    (state: RootState) => state.authReducer.role == "admin"
+  )
+
   const { refetch } = useQuery({
     queryKey: ["get-forms"],
   });
@@ -26,7 +30,7 @@ export const OpenFormToast: FC = () => {
     <ToastContainer position="bottom-end">
       <Toast
         onClose={handleClose}
-        show={lastAction === "add"}
+        show={lastAction === "add" && isAdmin}
         delay={5000}
         autohide
       >
