@@ -1,15 +1,12 @@
-import classNames from "classnames";
-import styles from "./header.module.css";
+import { Container, Nav, Navbar } from "react-bootstrap";
+import styles from './header.module.css'
+import { Link } from "react-router-dom";
 
 export function Header() {
   return (
-    <div className={styles.header}>
-      <p className={classNames(styles.header__btn)}>АРМ дежурного по станции</p>
-      <p
-        className={classNames(styles.header__btn, styles.header__btn_disabled)}
-      >
-        Журнал операций
-      </p>
-    </div>
+    <Navbar className={styles.header}>
+      <a className={styles.link} href='/'>Карта</a>
+      <a className={styles.link} href='/login'>Авторизация</a>
+    </Navbar>
   );
 }
