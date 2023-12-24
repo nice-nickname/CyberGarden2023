@@ -1,22 +1,22 @@
 export const stationsMock = [
   {
     id: 1,
-    name: "Нахуй",
+    name: "Пасхалка 1",
   },
   {
     id: 2,
-    name: "Сосать",
+    name: "Пасхалка 2",
   },
   {
     id: 3,
-    name: "Пидор",
+    name: "Пасхалка 3",
   },
   {
     id: 4,
-    name: "Очко",
+    name: "Пасхалка 4",
   },
   {
     id: 5,
-    name: "Блять",
+    name: "Пасхалка 5",
   },
 ];
