@@ -11,6 +11,7 @@ import { router } from "./routing/routing";
 import { OpenFormToast } from "./components/toasts";
 import { OperationMoveForm } from "./components/operation-forms/move-form";
 import ws from "./ws/websocket";
+import { Header } from "./components/header/header";
 
 ws();
 
@@ -21,6 +22,7 @@ function App() {
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <DndProvider backend={HTML5Backend}>
+          <Header />
           <RouterProvider router={router} />
           <Tooltip id="train-info" />
           <OperationMoveForm />
