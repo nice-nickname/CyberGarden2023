@@ -7,3 +7,25 @@
 .chip.active {
     color: #FF9337;
 }
+
+.auth {
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(0, 0, 0, .55);
+}
+
+.authPane {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pane {
+    display: flex;
+
+    height: 700px;
+}
