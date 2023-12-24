@@ -1,10 +1,11 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { Toast, ToastContainer } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { RootState, store } from "../../redux";
 import { clearOpenForm } from "../../redux/slices/open-forms-slice";
+import { useQuery } from "@tanstack/react-query";
 
-const OpenFormToast: FC = () => {
+export const OpenFormToast: FC = () => {
   const newFormId = useSelector((state: RootState) =>
     state.openFormsReducer.formIds.at(-1),
   );
@@ -12,7 +13,12 @@ const OpenFormToast: FC = () => {
     (state: RootState) => state.openFormsReducer.lastAction,
   );
 
+  const { refetch } = useQuery({
+    queryKey: ["get-forms"],
+  });
+
   const handleClose = () => {
+    refetch()
     store.dispatch(clearOpenForm());
   };
 
@@ -33,4 +39,4 @@ const OpenFormToast: FC = () => {
   );
 };
 
-export { OpenFormToast };
+
