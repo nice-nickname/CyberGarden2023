@@ -20,6 +20,8 @@ export interface IParkRowProps {
 export function ParkRow({ id, stationId, parkId }: IParkRowProps) {
   const dispatch = useDispatch();
 
+  
+  const choosenWagons = useSelector((state: RootState) => state.wagonsReducer.wagons)
   const linesFilter = useSelector((state: RootState) => state.filterStationReducer.allLines)
 
   const { data } = useQuery({
@@ -82,6 +84,7 @@ export function ParkRow({ id, stationId, parkId }: IParkRowProps) {
             stationId={stationId}
             parkId={parkId}
             wayId={id}
+            active={!!choosenWagons?.find(w => w.id === wagonId)}
           />
         ))}
       </div>
