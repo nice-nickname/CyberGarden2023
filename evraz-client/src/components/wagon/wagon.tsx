@@ -78,7 +78,7 @@ export const Wagon = memo(({ id, parkId, stationId, wayId }: IWagonProps) => {
     return null;
   }
   return (
-    <OverlayTrigger placement="right" overlay={popover}>
+    <OverlayTrigger placement="right" overlay={popover} delay={2000}>
       <div className={styles.wagon_full}>
         {numberFilter && <p className={styles.wagon__number}>{data?.inventoryNumber}</p>}
         <div ref={dragRef} style={{ opacity }}>
