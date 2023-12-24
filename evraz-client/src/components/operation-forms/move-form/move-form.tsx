@@ -32,6 +32,7 @@ function OperationMoveForm() {
     waySecondId,
     type,
   } = useSelector((state: RootState) => state.stationOperationReducer);
+  const wagons = useSelector((state: RootState) => state.wagonsReducer.wagons)
 
   const { data: wagonData } = useQuery({
     queryKey: ["get-wagon", trainFirstId],
@@ -92,9 +93,7 @@ function OperationMoveForm() {
       destinationPark: parkSecondId,
       destinationWay: waySecondId,
       locomotives: [1],
-      wagons: [
-        trainFirstId
-      ],
+      wagons: wagons?.map(w => w.id),
       needAcceptance: true,
       reasonId: reason,
       comment: comments,

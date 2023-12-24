@@ -10,7 +10,7 @@ export interface IStationState {
 }
 
 export const initialState: IStationState = {
-    wagons: null
+    wagons: []
 };
 
 export const wagonsSlice = createSlice({

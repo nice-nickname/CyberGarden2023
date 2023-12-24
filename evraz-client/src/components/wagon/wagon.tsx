@@ -53,7 +53,7 @@ export const Wagon = memo(({ id, parkId, stationId, wayId, active }: IWagonProps
       return 
     }
     store.dispatch(setWagon({id, wayId, parkId, stationId}))
-  }, [])
+  }, [id, wayId, parkId, stationId])
 
   const [{ opacity }, dragRef] = useDrag(
     () => ({
