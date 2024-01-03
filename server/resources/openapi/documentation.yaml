@@ -1,0 +1,8 @@
+openapi: "3.0.3"
+info:
+  title: "cyb17_server API"
+  description: "cyb17_server API"
+  version: "1.0.0"
+servers:
+- url: "https://cyb17_server"
+paths: {}
